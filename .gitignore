@@ -1,0 +1,15 @@
+# 1) Python cache files - auto generated when your code runs
+__pycache__/
+*.pyc
+
+# 2) Streamlit cache and logs (but NOT your theme config)
+.streamlit/cache/
+.streamlit/*.log
+
+# 3) Virtual environments (if you ever create one later)
+venv/
+env/
+
+# 4) OS / editor junk files
+.DS_Store
+Thumbs.db
