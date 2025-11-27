@@ -36,7 +36,7 @@ def save_recipes(data):
 recipes = load_recipes()
 days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
-st.title("🍽️ Weekly Meal Planner & Recipe Manager")
+st.title("🍽️ Weekly Meal Planner")
 
 # ---------------------------
 # 1) WEEKLY PLANNER (TOP + COMPACT)
