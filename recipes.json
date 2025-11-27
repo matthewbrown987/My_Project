@@ -1,0 +1,58 @@
+{
+    "under_20_min": [
+        {
+            "name": "Grilled Chicken, Rice & Veg",
+            "ingredients": [
+                "Chicken breast",
+                "microwave rice",
+                "vegetables"
+            ]
+        },
+        {
+            "name": "Grilled Chicken, Rice & Veg",
+            "ingredients": [
+                "Cooked Fish",
+                "Rice & Veg"
+            ]
+        },
+        {
+            "name": "Prawn Stir Fry",
+            "ingredients": [
+                "Prawn",
+                "stir fry noodles",
+                "stir fry veg",
+                "soy sauce",
+                "garlic",
+                "ginger",
+                "chilli"
+            ]
+        }
+    ],
+    "30_min": [
+        {
+            "name": "Sausage, Mash, Vef",
+            "ingredients": [
+                "Sausage",
+                "Mash",
+                "Veg"
+            ]
+        }
+    ],
+    "batch_cooking": [
+        {
+            "name": "Chicken Chorizo Stew",
+            "ingredients": [
+                "Chicken Breast",
+                "Chorizo",
+                "Chopped Tomatoes",
+                "1 x Red Onion",
+                "2x Garlic Cloves",
+                "1 x Red Chilli",
+                "100ml stock",
+                "2 tsp paprika",
+                "1 tsp chilli powder",
+                "2 tsp ground coriander powder"
+            ]
+        }
+    ]
+}
