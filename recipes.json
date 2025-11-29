@@ -9,13 +9,6 @@
             ]
         },
         {
-            "name": "Grilled Chicken, Rice & Veg",
-            "ingredients": [
-                "Cooked Fish",
-                "Rice & Veg"
-            ]
-        },
-        {
             "name": "Prawn Stir Fry",
             "ingredients": [
                 "Prawn",
@@ -30,11 +23,24 @@
     ],
     "30_min": [
         {
-            "name": "Sausage, Mash, Vef",
+            "name": "Sausage, Mash, Veg",
             "ingredients": [
                 "Sausage",
                 "Mash",
                 "Veg"
+            ]
+        },
+        {
+            "name": "Fajitas",
+            "ingredients": [
+                "Fajita Seasoning",
+                "chicken",
+                "pepper",
+                "mushrooms",
+                "onion",
+                "grated cheese",
+                "tortilla wraps\n\nOptional: guacamole",
+                "salsa"
             ]
         }
     ],

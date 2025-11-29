@@ -39,23 +39,21 @@ days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 st.title("🍽️ Weekly Meal Planner")
 
 # ---------------------------
-# 1) WEEKLY PLANNER (TOP + COMPACT)
+# 1) WEEKLY PLANNER
 # ---------------------------
 st.subheader("📅 Plan Your Week")
 st.write("Select a meal category for each day:")
 
-cols = st.columns(2)  # 2-column dropdown layout
+cols = st.columns(2)
 weekly_plan_selection = {}
 
 for i, day in enumerate(days):
-    with cols[i % 2]:  # alternate between columns
+    with cols[i % 2]:
         weekly_plan_selection[day] = st.selectbox(
             day,
             options=list(recipes.keys()),
             key=f"select_{day}"
         )
-
-st.write("")  # spacing
 
 if st.button("Generate Weekly Meal Plan"):
     st.subheader("🗓️ Your Weekly Meal Plan")
@@ -73,7 +71,7 @@ if st.button("Generate Weekly Meal Plan"):
 st.divider()
 
 # ---------------------------
-# 2) ADD RECIPE SECTION
+# 2) ADD RECIPE
 # ---------------------------
 st.subheader("➕ Add a New Recipe")
 
@@ -86,27 +84,70 @@ if st.button("Add Recipe"):
     if recipe_name.strip() and ingredients.strip():
         ingredient_list = [i.strip() for i in ingredients.split(",")]
         recipes[category].append(
-            {
-                "name": recipe_name.strip(),
-                "ingredients": ingredient_list
-            }
+            {"name": recipe_name.strip(), "ingredients": ingredient_list}
         )
         save_recipes(recipes)
         st.success(f"🎉 Added **{recipe_name}** to **{category}**!")
+        st.rerun()
     else:
         st.warning("⚠️ Please fill out both fields before adding.")
 
 st.divider()
 
 # ---------------------------
-# 3) RECIPE MANAGER (VIEW / EDIT / DELETE)
+# 3) RECIPE MANAGER
 # ---------------------------
 st.subheader("📚 Recipe Manager (View, Edit or Delete)")
 
 for cat, items in recipes.items():
     st.markdown(f"### 🍽️ {cat.replace('_',' ').title()}")
+
     if not items:
         st.write("🔎 No recipes yet.")
-    else:
-        for idx, recipe in enumerate(items):
-            st.write(f"**{recipe['name']}**")
+        continue
+
+    for idx, recipe in enumerate(items):
+        with st.expander(f"📖 {recipe['name']}"):
+            st.write("**Ingredients:** " + ", ".join(recipe["ingredients"]))
+
+            col1, col2 = st.columns(2)
+
+            # --- EDIT BUTTON ---
+            if col1.button("✏️ Edit", key=f"edit_{cat}_{idx}"):
+
+                st.session_state.edit_key = (cat, idx)
+                st.session_state.edit_name = recipe["name"]
+                st.session_state.edit_ingredients = ", ".join(recipe["ingredients"])
+                st.rerun()
+
+            # --- DELETE BUTTON ---
+            if col2.button("🗑️ Delete", key=f"delete_{cat}_{idx}"):
+                recipes[cat].pop(idx)
+                save_recipes(recipes)
+                st.success("Recipe deleted!")
+                st.rerun()
+
+# ---------------------------
+# 4) EDIT FORM (POPUP STYLE)
+# ---------------------------
+if "edit_key" in st.session_state:
+    cat, idx = st.session_state.edit_key
+
+    st.subheader("✏️ Edit Recipe")
+
+    new_name = st.text_input("Recipe name", st.session_state.edit_name)
+    new_ingredients = st.text_area("Ingredients (comma-separated)", 
+                                    st.session_state.edit_ingredients)
+
+    if st.button("Save Changes"):
+        recipes[cat][idx]["name"] = new_name.strip()
+        recipes[cat][idx]["ingredients"] = [i.strip() for i in new_ingredients.split(",")]
+        save_recipes(recipes)
+
+        del st.session_state.edit_key
+        st.success("Recipe updated!")
+        st.rerun()
+
+    if st.button("Cancel Edit"):
+        del st.session_state.edit_key
+        st.rerun()
